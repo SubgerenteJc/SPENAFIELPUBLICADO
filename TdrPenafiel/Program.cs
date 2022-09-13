@@ -668,10 +668,18 @@ namespace TdrPenafiel
                                     string tipom = "2";
                                     //string mensaje = "Cartaporte timbrada con exito!!!";
                                     DataTable updateLeg = facLabControler.UpdateLeg(leg, tipom);
-                                    foreach (DataRow item in updateLeg.Rows)
+                                    //CON ESTO ACTUALIZAMOS EL ORDERHEADER 
+                                    DataTable rorder = facLabControler.SelectLegHeader(leg);
+
+                                    if (rorder.Rows.Count > 0)
                                     {
-                                        string rupdate = item["segmento"].ToString();
-                                        string lupdate = item["estatus"].ToString();
+                                        foreach (DataRow reslo in rorder.Rows)
+                                        {
+                                            string rorderh = reslo["ord_hdrnumber"].ToString();
+                                            DateTime dt = DateTime.Parse(reslo["fecha"].ToString());
+                                            string rfecha = dt.ToString("yyyy'/'MM'/'dd HH:mm:ss");
+                                            DataTable uporder = facLabControler.UpdateOrderHeader(rorderh, rfecha);
+                                        }
                                     }
                                     //facLabControler.enviarNotificacion(leg, mensaje);
 

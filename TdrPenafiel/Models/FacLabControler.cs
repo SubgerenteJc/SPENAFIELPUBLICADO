@@ -43,6 +43,14 @@ namespace TdrPenafiel.Models
         {
             return this.modelFact.ObtSegmento(orden);
         }
+        public DataTable SelectLegHeader(string orseg)
+        {
+            return this.modelFact.SelectLegHeader(orseg);
+        }
+        public DataTable UpdateOrderHeader(string orheader, string fecha)
+        {
+            return this.modelFact.UpdateOrderHeader(orheader, fecha);
+        }
         public DataTable ExisteSegmentos(string seg)
         {
             return this.modelFact.ExisteSegmentos(seg);
