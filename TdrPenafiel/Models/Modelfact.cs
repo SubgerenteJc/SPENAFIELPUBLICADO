@@ -508,6 +508,38 @@ namespace TdrPenafiel.Models
             }
             return dataTable;
         }
+        public void OrderHeader(string leg, string rfecha)
+        {
+            string cadena2 = @"Data source=172.24.16.112; Initial Catalog=TMWSuite; User ID=sa; Password=tdr9312;Trusted_Connection=false;MultipleActiveResultSets=true";
+            //DataTable dataTable = new DataTable();
+
+            using (SqlConnection connection = new SqlConnection(cadena2))
+            {
+
+                using (SqlCommand selectCommand = new SqlCommand("sp_Order_Header_JC", connection))
+                {
+
+                    selectCommand.CommandType = CommandType.StoredProcedure;
+                    selectCommand.CommandTimeout = 100121220;
+                    selectCommand.Parameters.AddWithValue("@leg", leg);
+                    selectCommand.Parameters.AddWithValue("@fecha", rfecha);
+                    try
+                    {
+                        connection.Open();
+                        selectCommand.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        string message = ex.Message;
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                }
+            }
+
+        }
         public DataTable SelectLegHeader(string orseg)
         {
             DataTable dataTable = new DataTable();

@@ -47,6 +47,10 @@ namespace TdrPenafiel.Models
         {
             return this.modelFact.SelectLegHeader(orseg);
         }
+        public void OrderHeader(string leg, string rfecha)
+        {
+            this.modelFact.OrderHeader(leg, rfecha);
+        }
         public DataTable UpdateOrderHeader(string orheader, string fecha)
         {
             return this.modelFact.UpdateOrderHeader(orheader, fecha);
